@@ -226,17 +226,14 @@ echo ##### rendering_done """
 			self.wfile.write(bytes('</form>\n', 'utf-8'))
 			self.wfile.write(bytes('</body>\n', 'utf-8'))
 			self.wfile.write(bytes('</html>\n', 'utf-8'))
-		elif self.path == '/notepad':
+		elif self.path == '/execute_job':
 			send_header(self)
-			self.wfile.write(bytes("Notebook", 'utf-8'))
-			try:
-				subprocess.Popen('notepad.exe')
-			except:
-				self.wfile.write(bytes("failed", 'utf-8'))
+			parsed = urlparse(self.path)
+			parameters = parse_qs(parsed.query)
+
 		elif '/submit_job' in self.path:
 			send_header(self)
 			self.wfile.write(bytes(str(self.client_address), 'utf-8'))
-			output = {}
 			parsed = urlparse(self.path)
 			parameters = parse_qs(parsed.query)
 			#print(parsed)
