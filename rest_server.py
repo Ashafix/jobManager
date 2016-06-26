@@ -57,6 +57,7 @@ jobs = {}
 
 def send_header(BaseHTTPRequestHandler):
 	BaseHTTPRequestHandler.send_response(200)
+	BaseHTTPRequestHandler.send_header('Access-Control-Allow-Origin', '*')
 	BaseHTTPRequestHandler.send_header('Content-type:', 'text/html')
 	BaseHTTPRequestHandler.end_headers()
 	BaseHTTPRequestHandler.wfile.write(bytes('\n', 'utf-8'))
